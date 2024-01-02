@@ -1,0 +1,13 @@
+<title>Camps</title>
+<%= layout('layouts/boilerplate');%>
+    <a href="viewcamps/createnew" style="color: blueviolet;"><h2>Create New CampGround</h2></a>
+        <% for( let camp of campgrounds ) { %>
+            <div class="card col p-0" style="min-width: 20rem; max-width: 20rem; margin: 10px auto;">
+                <img src="<%= camp.image %>" class="card-img-top" >
+                <div class="card-body">
+                  <h5 class="card-title"><a href="viewcamps/campdetails/<%= camp._id  %>"><%= camp.title %></a></h5>
+                  <p class="card-text"><%= camp.description %></p>
+                </div>
+            </div>    
+        <% } %>
+

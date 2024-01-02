@@ -1,0 +1,42 @@
+<title>Create New</title>
+<%= layout('layouts/boilerplate');%>
+<div style="max-width: 400px;  margin: auto;">
+ <h2>Create New Camp!</h2>
+  <form class="needs-validation" action="/savecamp" method="POST" novalidate>
+      <div class="mb-3">
+        <label for="title" class="form-label" name="title" >Title</label>
+        <input type="text" class="form-control" id="title" name="title" required style="border: 1px solid rgb(81, 80, 80);">
+        <div class="valid-feedback">
+          Looks good!
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="location" class="form-label" name="location">Location</label>
+        <input type="text" class="form-control" id="location" name="location" required style="border: 1px solid rgb(81, 80, 80);">
+        <div class="valid-feedback">
+          Looks good!
+        </div>
+      </div>
+      <label for="price" class="form-label" name="price">Price</label>
+      <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1">$</span>
+          <input type="number" class="form-control" id="price" name="price" min="0" max="500" required style="border: 1px solid rgb(81, 80, 80)">
+          <div class="valid-feedback">
+            Looks good!
+          </div>
+          <div class="invalid-feedback">
+              Price must be between 0 and 500
+          </div>
+      </div>
+      <div class="mb-3">
+          <label for="description" name="description" class="form-label">Description</label>
+          <textarea type="text-area" id="description" name="description" class="form-control" required style="border: 1px solid rgb(81, 80, 80);"></textarea>
+          <div class="valid-feedback">
+            Looks good!
+          </div>
+      </div>
+      <div class="d-grid  d-md-flex justify-content-center">
+        <button  type="submit" class="btn btn-success">Submit</button>
+      </div>
+  </form>
+</div>

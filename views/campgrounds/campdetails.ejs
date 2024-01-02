@@ -1,0 +1,49 @@
+<title>Camp Details</title>
+<%= layout('layouts/boilerplate');%>
+<div class="row justify-content-center">
+    <div class="col-sm-4 justify-content-center">
+      <div class="card m-auto p-0">
+        <img src="<%= campground.image %>" class="card-img-top p-0" style="max-height:300px;"  alt=<%= campground.title %>>
+        <div class="card-body">
+          <h5 class="card-title"><%= campground.title %></h5>
+          <p class="card-text"><%= campground.description %></p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item"><%= campground.location %></li>
+          <li class="list-group-item">$ <%= campground.price %></li>
+        </ul>
+        <div class="card-body">
+          <a class="btn btn-info" href="/editcamp/<%= campground._id  %>" role="button">Edit</a>
+          <form action="/deletecamp/<%= campground._id %>?_method=DELETE" method="POST" style="display: inline;">
+            <button class="btn btn-danger" >Delete</button>
+          </form>
+          <a class="btn btn-light" href="/viewcamps" role="button">Back</a>
+        </div>
+      </div>
+    </div>
+  <div class="col-sm-4 justify-content-center">
+     <form class="needs-validation" action="<%= campground._id%>/review" method="POST" novalidate>
+          <label for="customRange2" class="form-label">Rating</label>
+          <input type="range" class="form-range" min="0" max="5" id="customRange2" name="rating">
+          <div class="mb-3">
+                <label for="description" class="form-label">Description</label>
+                <textarea class="form-control" id="description" rows="3" name="reviewDescp" required></textarea>
+          </div>
+          <button class="btn btn-success">Submit Review</button>
+      </form>
+     <div>
+      <%  campground.review.forEach((review) => { %>
+                <div class="card mt-2 mb-2">
+                  <div class="card-header">
+                     Rating <%= review.rating %>
+                  </div>
+                  <div class="card-body">
+                      <p><%= review.reviewDescp %></p>
+                  </div>
+                </div>
+          <% })%>
+  </div>
+
+</div>
+</div>
+
