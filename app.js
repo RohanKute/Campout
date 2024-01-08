@@ -11,7 +11,7 @@ const  {validateAsycFn} = require('./validation/ValidationAsync');
 const  {validateSchema , validateReviewSchema}  = require('./validation/SchemaValidate');
 const engine = require('ejs-mate');
 var methodOverride = require('method-override');
-const campRoute = require('./routes/campground');
+const campRoute = require('./routes/campRoutes');
 const cudRoute = require('./routes/cudRoutes');
 
 app.use(methodOverride('_method'))
@@ -20,7 +20,7 @@ app.set('view engine' , 'ejs');
 app.set('views', path.join(__dirname , 'views'));
 app.engine('ejs', engine);
 app.use(express.static('assets')) 
-app.use('/viewcamps' , campRoute);
+app.use('/viewcamps' , campRoute)
 app.use('/' , cudRoute);
 
 // connecting to DB 'yelp_camp'
