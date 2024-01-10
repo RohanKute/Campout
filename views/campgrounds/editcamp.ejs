@@ -1,5 +1,6 @@
 <title>Edit Camp</title>
-<%= layout('layouts/boilerplate');%>
+<% layout('layouts/boilerplate');%>
+
 <div style="max-width: 400px;  margin: auto;">
    <h3>Edit Camp!</h3>
         <form class="needs-validation" action="/updatecamp/<%= campground.id %>?_method=PUT" method="POST" novalidate>
