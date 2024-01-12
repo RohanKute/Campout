@@ -35,5 +35,12 @@ router.delete('/deletecamp/:id' , async (req , res) =>{
       res.redirect(`/viewcamps`);
 });
 
+router.get('/login' , (req , res) =>{
+          res.render('campgrounds/login');
+})
+
+router.get('/signup' , (req , res) =>{
+        res.render('campgrounds/signup');
+})
 module.exports = router;
 

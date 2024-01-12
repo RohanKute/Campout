@@ -1,0 +1,25 @@
+<title>Login</title>
+<% layout('layouts/boilerplate');%>
+
+<div style="max-width: 400px;  margin: auto;">
+   <h3>Login</h3>
+        <form class="needs-validation" action="/login" method="POST" novalidate>
+               <div class="mb-3">
+                 <label for="username" class="form-label" name="title" >Username</label>
+                 <input type="text" class="form-control" id="username" name="username"  required style="border: 1px solid rgb(81, 80, 80);">
+                 <div class="valid-feedback">
+                   Looks good!
+                 </div>
+               </div>
+               <div class="mb-3">
+                <label for="password" class="form-label" name="location">Password</label>
+                <input type="text" class="form-control" id="password" name="password" required style="border: 1px solid rgb(81, 80, 80);">
+                <div class="valid-feedback">
+                  Looks good!
+                </div>
+              </div>
+               <div class="d-grid  d-md-flex justify-content-center">
+                 <button  type="submit" class="btn btn-success">login</button>
+               </div>
+           </form>
+</div>

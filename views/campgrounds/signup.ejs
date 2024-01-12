@@ -1,0 +1,32 @@
+<title>Signup</title>
+<% layout('layouts/boilerplate');%>
+
+<div style="max-width: 400px;  margin: auto;">
+   <h3>Signup</h3>
+        <form class="needs-validation" action="/signup" method="POST" novalidate>
+               <div class="mb-3">
+                 <label for="email" class="form-label" name="email" >Email</label>
+                 <input type="email" class="form-control" id="email" name="email"  required style="border: 1px solid rgb(81, 80, 80);">
+                 <div class="valid-feedback">
+                   Looks good!
+                 </div>
+               </div>
+               <div class="mb-3">
+                <label for="username" class="form-label" name="username" >Username</label>
+                <input type="text" class="form-control" id="username" name="username"  required style="border: 1px solid rgb(81, 80, 80);">
+                <div class="valid-feedback">
+                  Looks good!
+                </div>
+              </div>
+               <div class="mb-3">
+                 <label for="password" class="form-label" name="password">Password</label>
+                 <input type="password" class="form-control" id="password" name="password" required style="border: 1px solid rgb(81, 80, 80);">
+                 <div class="valid-feedback">
+                   Looks good!
+                 </div>
+               </div>
+               <div class="d-grid  d-md-flex justify-content-center">
+                 <button  type="submit" class="btn btn-success">Signup</button>
+               </div>
+           </form>
+</div>

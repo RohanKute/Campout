@@ -28,6 +28,7 @@ router.post('/campdetails/:id/review' , validateReviewSchema, validateAsycFn(asy
       await review.save();
       let campground =  await Campground.findByIdAndUpdate(id , { $push: { review: review._id }});
       campground.save();;
+      req.flash('success' , 'Successfully added Review!')
       res.redirect(`/viewcamps/campdetails/${id}`);
 }));
 

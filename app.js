@@ -3,18 +3,18 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const mongoose = require('mongoose');
-const Campground = require('./DB/campgroundDB');
-const Review = require('./DB/reviewDB');
 const bodyParser = require('body-parser');
 const ValError = require('./validation/ValError');
-const  {validateAsycFn} = require('./validation/ValidationAsync');
-const  {validateSchema , validateReviewSchema}  = require('./validation/SchemaValidate');
 const ejsMate = require('ejs-mate');
 var methodOverride = require('method-override');
 const campRoute = require('./routes/campRoutes');
 const cudRoute = require('./routes/cudRoutes');
+const authRoute = require('./routes/authRoutes');
 const session = require('express-session');
 const flash = require('connect-flash');
+const passport = require('passport');
+const User = require('./DB/userDB');
+
 
 app.use(methodOverride('_method'))
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -26,7 +26,7 @@ app.use(express.static('assets'))
 app.use(session({
   secret: 'secreteforsession',
   resave: false,
-  saveUninitialized: true,
+  saveUninitialized: false,
   cookie: {
     expires : Date.now() * 1000 * 60 * 60 * 24 * 7,
     httpOnly : true,
@@ -43,13 +43,19 @@ app.use((req, res, next) => {
 
 app.use('/viewcamps' , campRoute)
 app.use('/' , cudRoute);
-// connecting to DB 'yelp_camp'
+app.use('/' , authRoute);
+
+app.use(passport.session());
+
+passport.use(User.createStrategy());
+
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
 mongoose.connect('mongodb://127.0.0.1:27017/yelp-camp');
 
-// DB connection object
 const db = mongoose.connection;
 
-//then catch since "fn" is Aysnc 
 
 db.on('error', () => {
     console.log("DB connection fail")
