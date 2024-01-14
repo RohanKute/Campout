@@ -12,6 +12,7 @@ const UserSchema = new Schema({
     }
 });
 
-UserSchema.plugin(passportLocalMongoose, { usernameField: 'email' });
-
+UserSchema.plugin(passportLocalMongoose);
+// while signup username filed is checked for duplicate usernames , for duplicate email 
+// logic needed to be written 
 module.exports = mongoose.model('User', UserSchema);

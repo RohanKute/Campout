@@ -7,6 +7,8 @@ const Review = require('../DB/reviewDB');
 const bodyParser = require('body-parser');
 const  {validateAsycFn} = require('../validation/ValidationAsync');
 const  {validateSchema , validateReviewSchema}  = require('../validation/SchemaValidate');
+const { IsLoggedIn  } = require('../validation/auth/Islogged');
+
 
 
 router.get('/' , async(req , res)=>{
@@ -22,18 +24,18 @@ router.get('/campdetails/:id' , async(req , res)=>{
 });
 
 
-router.post('/campdetails/:id/review' , validateReviewSchema, validateAsycFn(async(req , res)=>{
+router.post('/campdetails/:id/review', IsLoggedIn, validateReviewSchema, validateAsycFn(async(req , res)=>{
       const id = req.params.id;
       const review = new Review(req.body);
       await review.save();
       let campground =  await Campground.findByIdAndUpdate(id , { $push: { review: review._id }});
-      campground.save();;
+      campground.save()
       req.flash('success' , 'Successfully added Review!')
       res.redirect(`/viewcamps/campdetails/${id}`);
 }));
 
-router.get('/createnew' , async (req ,res) => {
-  res.render('campgrounds/createnew');
+router.get('/createnew' , IsLoggedIn ,async (req ,res) => {
+      res.render('campgrounds/createnew');
 });
 
 module.exports = router;

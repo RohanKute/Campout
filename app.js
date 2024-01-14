@@ -14,6 +14,7 @@ const session = require('express-session');
 const flash = require('connect-flash');
 const passport = require('passport');
 const User = require('./DB/userDB');
+const LocalStrategy = require('passport-local');
 
 
 app.use(methodOverride('_method'))
@@ -35,26 +36,40 @@ app.use(session({
 }));
 app.use(flash());
 
-app.use((req, res, next) => {
-  res.locals.success = req.flash('success');
-  res.locals.error = req.flash('error');
-  next();
-})
-
-app.use('/viewcamps' , campRoute)
-app.use('/' , cudRoute);
-app.use('/' , authRoute);
-
-app.use(passport.session());
-
-passport.use(User.createStrategy());
+passport.use(new LocalStrategy(User.authenticate()));
 
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use((req, res, next) => {
+  res.locals.currentUser = req.user;
+  res.locals.success = req.flash('success');
+  res.locals.error = req.flash('error');
+  next();
+});
+let publicUrl = "";
+const privateRoute = ['delete', 'login', 'review'];
+app.use((req, res, next) => {
+  if(/delete|login|review/.test(req.originalUrl)){
+     req.session.returnTo = publicUrl;
+  }
+  else{
+    publicUrl = req.originalUrl;
+    req.session.returnTo = req.originalUrl;
+  }
+  next();
+});
+
 mongoose.connect('mongodb://127.0.0.1:27017/yelp-camp');
 
 const db = mongoose.connection;
+
+app.use('/viewcamps' , campRoute)
+app.use('/' , cudRoute);
+app.use('/' , authRoute);
 
 
 db.on('error', () => {
@@ -79,6 +94,7 @@ app.use((err , req , res , next)=>{
   if (!err.message) err.message = 'Oh No, Something Went Wrong!'
   res.status(statusCode).render('campgrounds/error', { err })
 })
+
 
 
 
