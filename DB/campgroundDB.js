@@ -11,7 +11,11 @@ const campgSchema = new Schema({
     description : String,
     location: String,
     image: String,
-    review : [{
+    author :{
+           type : Schema.Types.ObjectId,
+           ref : 'User'
+    },
+    review :[ {
         type : Schema.Types.ObjectId, ref : 'Review'
     }]
 })

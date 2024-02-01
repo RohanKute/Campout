@@ -11,38 +11,51 @@
         <ul class="list-group list-group-flush">
           <li class="list-group-item"><%= campground.location %></li>
           <li class="list-group-item">$ <%= campground.price %></li>
+          <li class="list-group-item">By <%= campground.author.username %></li>
         </ul>
         <div class="card-body">
-          <a class="btn btn-info" href="/editcamp/<%= campground._id  %>" role="button">Edit</a>
-          <form action="/deletecamp/<%= campground._id %>?_method=DELETE" method="POST" style="display: inline;">
-            <button class="btn btn-danger" >Delete</button>
-          </form>
+            <% if (currentUser && currentUser._id.equals(campground.author._id)) { %>
+              <a class="btn btn-info" href="/editcamp/<%= campground._id  %>" role="button">Edit</a>
+              <form action="/deletecamp/<%= campground._id %>?_method=DELETE" method="POST" style="display: inline;">
+                <button class="btn btn-danger" >Delete</button>
+              </form>
+            <% } %>
           <a class="btn btn-light" href="/viewcamps" role="button">Back</a>
         </div>
       </div>
     </div>
-  <div class="col-sm-4 justify-content-center">
-     <form class="needs-validation" action="<%= campground._id%>/review" method="POST" novalidate>
-          <label for="customRange2" class="form-label">Rating</label>
-          <input type="range" class="form-range" min="0" max="5" id="customRange2" name="rating">
-          <div class="mb-3">
-                <label for="description" class="form-label">Description</label>
-                <textarea class="form-control" id="description" rows="3" name="reviewDescp" required></textarea>
-          </div>
-          <button class="btn btn-success">Submit Review</button>
-      </form>
+    <div class="col-sm-4 justify-content-center">
+     <% if (currentUser) { %>
+        <form class="needs-validation" action="<%= campground._id%>/review" method="POST" novalidate>
+             <label for="customRange2" class="form-label">Rating</label>
+             <input type="range" class="form-range" min="0" max="5" id="customRange2" name="rating">
+             <div class="mb-3">
+                   <label for="description" class="form-label">Description</label>
+                   <textarea class="form-control" id="description" rows="3" name="reviewDescp" required></textarea>
+             </div>
+             <button class="btn btn-success">Submit Review</button>
+         </form>
+     <% } %>
      <div>
       <%  campground.review.forEach((review) => { %>
                 <div class="card mt-2 mb-2">
                   <div class="card-header">
-                     Rating <%= review.rating %>
+                  <%= review.rating %> Star 
                   </div>
                   <div class="card-body">
-                      <p><%= review.reviewDescp %></p>
+                    <p><b><%= review.reviewDescp %></b></p>
+                    <p class="text-muted">By <%= review.author.username %></p>
+                    <% if (currentUser && currentUser._id.equals(review.author._id)) { %>
+                      <form action="/deletereview/<%= review._id %>?_method=DELETE" method="POST" style="display: inline;">
+                        <button class="btn btn-danger" >Delete</button>
+                      </form>
+                    <% } %>
                   </div>
                 </div>
-          <% })%>
+      <% })%>
+    </div>
   </div>
+
 
 </div>
 </div>

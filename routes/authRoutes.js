@@ -34,7 +34,7 @@ router.post('/signup' ,validateAsycFn( async (req , res , next) =>{
    }
 }));
 
-router.post('/login', storeReturnTo, passport.authenticate('local', { failureRedirect: '/login', failureFlash: true }), function(req, res) {
+router.post('/login', storeReturnTo , passport.authenticate('local', { failureRedirect: '/login', failureFlash: true }), function(req, res) {
 
        req.flash('success' , 'Welcome back!');
        const redirectUrl = res.locals.returnTo || '/viewcamps';

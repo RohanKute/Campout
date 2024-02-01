@@ -3,7 +3,6 @@ const  ValError  = require('./ValError');
 
 const schema = Joi.object({
     title: Joi.string().required(),
-
     price: Joi.number()
         .min(0)
         .max(500)
@@ -14,6 +13,7 @@ const schema = Joi.object({
     
     location : Joi.string()
               .required(),
+
 }).required(); 
 
 

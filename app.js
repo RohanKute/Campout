@@ -15,6 +15,7 @@ const flash = require('connect-flash');
 const passport = require('passport');
 const User = require('./DB/userDB');
 const LocalStrategy = require('passport-local');
+const checkReturnTo = require('./validation/auth/checkReturnTo');
 
 
 app.use(methodOverride('_method'))
@@ -45,23 +46,13 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use((req, res, next) => {
-  res.locals.currentUser = req.user;
-  res.locals.success = req.flash('success');
-  res.locals.error = req.flash('error');
-  next();
+      res.locals.currentUser = req.user;
+      res.locals.success = req.flash('success');
+      res.locals.error = req.flash('error');
+      next();
 });
-let publicUrl = "";
-const privateRoute = ['delete', 'login', 'review'];
-app.use((req, res, next) => {
-  if(/delete|login|review/.test(req.originalUrl)){
-     req.session.returnTo = publicUrl;
-  }
-  else{
-    publicUrl = req.originalUrl;
-    req.session.returnTo = req.originalUrl;
-  }
-  next();
-});
+
+app.use(checkReturnTo);
 
 mongoose.connect('mongodb://127.0.0.1:27017/yelp-camp');
 

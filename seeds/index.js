@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Campground = require('../DB/campgroundDB')
 const cities = require('./cities');
 const {descriptors , places} = require('./helpers')
-
+const Review = require('../DB/reviewDB')
 mongoose.connect('mongodb://127.0.0.1:27017/yelp-camp');
 
 const db = mongoose.connection;
@@ -25,7 +25,8 @@ const seedDB = async() => {
             title : `${getTitle(descriptors)} ${getTitle(places)}`,
             price : Math.floor(Math.random()  * 500),
             description : "Lorem ipsum dolor sit amet consectetur adipisicing  deleniti nam maxime",
-            image: 'https://source.unsplash.com/collection/483251'
+            image: 'https://source.unsplash.com/collection/483251',
+            author : "65ba023d48f818b8fea15de6"
         });
         await newCamp.save();
     }

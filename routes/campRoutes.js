@@ -18,8 +18,15 @@ router.get('/' , async(req , res)=>{
 
 router.get('/campdetails/:id' , async(req , res)=>{
       const id = req.params.id;
+      console.log(id);
       let campground =  await Campground.findById(id);
-      campground = await campground.populate('review');
+      campground = await campground.populate({
+            path: 'review',
+            populate: {
+              path: 'author' 
+            }
+          })
+      campground = await campground.populate('author');
       res.render('campgrounds/campdetails' , {campground});
 });
 
@@ -27,6 +34,7 @@ router.get('/campdetails/:id' , async(req , res)=>{
 router.post('/campdetails/:id/review', IsLoggedIn, validateReviewSchema, validateAsycFn(async(req , res)=>{
       const id = req.params.id;
       const review = new Review(req.body);
+      review.author = req.user._id;
       await review.save();
       let campground =  await Campground.findByIdAndUpdate(id , { $push: { review: review._id }});
       campground.save()
