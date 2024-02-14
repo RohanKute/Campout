@@ -3,9 +3,8 @@ const router = express.Router();
 
 
 const Campground = require('../Models/campgroundDB');
-const bodyParser = require('body-parser');
 const  {validateAsycFn} = require('../validation/ValidationAsync');
-const  {validateSchema , validateReviewSchema}  = require('../validation/SchemaValidate');
+const  {validateSchema}  = require('../validation/SchemaValidate');
 const { IsLoggedIn, storeReturnTo  } = require('../validation/auth/Islogged');
 const isAuthorCamp = require('../validation/auth/isAuthorCamp');
 const Review = require('../Models/reviewDB');

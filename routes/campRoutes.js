@@ -4,9 +4,8 @@ const router = express.Router();
 
 const Campground = require('../Models/campgroundDB');
 const Review = require('../Models/reviewDB');
-const bodyParser = require('body-parser');
 const  {validateAsycFn} = require('../validation/ValidationAsync');
-const  {validateSchema , validateReviewSchema}  = require('../validation/SchemaValidate');
+const  { validateReviewSchema}  = require('../validation/SchemaValidate');
 const { IsLoggedIn  } = require('../validation/auth/Islogged');
 
 
