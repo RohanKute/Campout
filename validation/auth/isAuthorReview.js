@@ -1,4 +1,4 @@
-const Review = require('../../DB/reviewDB');
+const Review = require('../../Models/reviewDB');
 
 module.exports = async function isAuthorCamp(req , res ,next) {
     const review = await Review.findById(req.params.id);

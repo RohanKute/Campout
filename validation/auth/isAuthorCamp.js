@@ -1,4 +1,4 @@
-const Campground = require('../../DB/campgroundDB');
+const Campground = require('../../Models/campgroundDB');
 
 module.exports = async function isAuthorCamp(req , res ,next) {
     const campground = await Campground.findById(req.params.id);

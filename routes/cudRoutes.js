@@ -2,13 +2,13 @@ const express = require('express')
 const router = express.Router();
 
 
-const Campground = require('../DB/campgroundDB');
+const Campground = require('../Models/campgroundDB');
 const bodyParser = require('body-parser');
 const  {validateAsycFn} = require('../validation/ValidationAsync');
 const  {validateSchema , validateReviewSchema}  = require('../validation/SchemaValidate');
 const { IsLoggedIn, storeReturnTo  } = require('../validation/auth/Islogged');
 const isAuthorCamp = require('../validation/auth/isAuthorCamp');
-const Review = require('../DB/reviewDB');
+const Review = require('../Models/reviewDB');
 const isAuthorReview = require('../validation/auth/isAuthorReview');
 
 

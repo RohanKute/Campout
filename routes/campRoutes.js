@@ -2,8 +2,8 @@ const express = require('express')
 const router = express.Router();
 
 
-const Campground = require('../DB/campgroundDB');
-const Review = require('../DB/reviewDB');
+const Campground = require('../Models/campgroundDB');
+const Review = require('../Models/reviewDB');
 const bodyParser = require('body-parser');
 const  {validateAsycFn} = require('../validation/ValidationAsync');
 const  {validateSchema , validateReviewSchema}  = require('../validation/SchemaValidate');

@@ -13,7 +13,7 @@ const authRoute = require('./routes/authRoutes');
 const session = require('express-session');
 const flash = require('connect-flash');
 const passport = require('passport');
-const User = require('./DB/userDB');
+const User = require('./Models/userDB');
 const LocalStrategy = require('passport-local');
 const checkReturnTo = require('./validation/auth/checkReturnTo');
 

@@ -1,13 +1,11 @@
 const express = require('express')
 const router = express.Router();
-const app = express();
 
-const User = require('../DB/userDB');
-const Campground = require('../DB/campgroundDB');
-const bodyParser = require('body-parser');
+const User = require('../Models/userDB');
+
 const  {validateAsycFn} = require('../validation/ValidationAsync');
 const passport  = require("passport");
-const { IsLoggedIn , storeReturnTo } = require('../validation/auth/Islogged');
+const {  storeReturnTo } = require('../validation/auth/Islogged');
 
 
 router.get('/login' , (req , res) =>{
@@ -18,7 +16,7 @@ router.get('/signup' , async(req , res) =>{
         res.render('campgrounds/signup');
 })
 
-router.post('/signup' ,validateAsycFn( async (req , res , next) =>{
+router.post('/signup' ,validateAsycFn(async (req , res , next) =>{
    try {
      const { email , username , password} = req.body;
      const newUser = new User({email , username});
