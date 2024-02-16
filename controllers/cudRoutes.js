@@ -1,4 +1,3 @@
-
 const Campground = require('../Models/campgroundDB');
 const Review = require('../Models/reviewDB');
 

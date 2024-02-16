@@ -1,4 +1,3 @@
-const express = require('express')
 const User = require('../Models/userDB');
 const passport  = require("passport");
 

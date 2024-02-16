@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router();
 const  {validateAsycFn} = require('../validation/ValidationAsync');
 const {  storeReturnTo } = require('../validation/auth/Islogged');
-const { signUpUser, authenticateUser, loginUser } = require('../controllers/authRoutes');
+const { signUpUser, authenticateUser, loginUser, logoutnUser } = require('../controllers/authRoutes');
 
 
 router.get('/login' , (req , res) =>{
@@ -17,7 +17,7 @@ router.post('/signup' ,validateAsycFn(signUpUser));
 
 router.post('/login', storeReturnTo ,authenticateUser, loginUser);
 
-router.get('/logout' , loginUser)
+router.get('/logout' , logoutnUser)
 
 module.exports = router;
 
