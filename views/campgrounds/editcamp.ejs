@@ -3,7 +3,7 @@
 
 <div style="max-width: 400px;  margin: auto;">
    <h3>Edit Camp!</h3>
-        <form class="needs-validation" action="/updatecamp/<%= campground.id %>?_method=PUT" method="POST" novalidate>
+        <form class="needs-validation" action="/updatecamp/<%= campground.id %>?_method=PUT"  enctype="multipart/form-data" method="POST" novalidate>
                <div class="mb-3">
                  <label for="title" class="form-label" name="title" >Title</label>
                  <input type="text" class="form-control" id="title" name="title"  required style="border: 1px solid rgb(81, 80, 80);" value="<%= campground.title %>">
@@ -36,8 +36,28 @@
                      Looks good!
                    </div>
                </div>
+               <div class="mb-3">
+                <label for="image" name="image" class="form-label">Add Image(s)</label>
+                <input type="file" name="image" multiple />
+                <div class="valid-feedback">
+                  Looks good!
+                </div>
+               </div>
+               <div class="mb-3">
+              <p class="form-label">Delete Images</p>
+                <% campground.image.forEach(image => { %>
+                  <div class="form-check position-relative d-inline m-1" style="max-width : 120px ; height: 120px;">
+                     <label class="form-check-label" for="<%= image.imgName %>">
+                      <img src="<%= image.thumbnail %>" class="mb-2 w-100 mh-95" style="max-width : 120px ; height: 120px;" alt="<%= campground.title %>">
+                     </label>
+                    <span class="position-absolute top-30 start-100 translate-middle badge">
+                      <input name="imageSelect[]" class="form-check-input" type="checkbox" value="<%= image.imgName %>" id="<%= image.imgName %>" style="width: 18px ; height:18px ;">
+                    </span>
+                  </div>
+                  <% }) %>
+               </div>
                <div class="d-grid  d-md-flex justify-content-center">
-                 <button  type="submit" class="btn btn-success">Submit</button>
+                 <button  type="submit" class="btn btn-success">Update</button>
                </div>
            </form>
 </div>

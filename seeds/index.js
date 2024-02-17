@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
-const Campground = require('../DB/campgroundDB')
+const Campground = require('../Models/campgroundDB')
 const cities = require('./cities');
 const {descriptors , places} = require('./helpers')
-const Review = require('../DB/reviewDB')
+const Review = require('../Models/reviewDB')
 mongoose.connect('mongodb://127.0.0.1:27017/yelp-camp');
 
 const db = mongoose.connection;
@@ -25,7 +25,14 @@ const seedDB = async() => {
             title : `${getTitle(descriptors)} ${getTitle(places)}`,
             price : Math.floor(Math.random()  * 500),
             description : "Lorem ipsum dolor sit amet consectetur adipisicing  deleniti nam maxime",
-            image: 'https://source.unsplash.com/collection/483251',
+            image: ({
+              url: 'https://res.cloudinary.com/duq3vm2lu/image/upload/v1708152259/campout-project/sq2iduivjsy6oyjvkbjj.jpg',
+              imgName: 'campout-project/sq2iduivjsy6oyjvkbjj',
+            },
+            {
+              url: 'https://res.cloudinary.com/duq3vm2lu/image/upload/v1708152260/campout-project/nm58mpt84gwmrqmhfjzf.jpg',
+              imgName: 'campout-project/nm58mpt84gwmrqmhfjzf',
+            }),
             author : "65ba023d48f818b8fea15de6"
         });
         await newCamp.save();

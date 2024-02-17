@@ -14,6 +14,8 @@ const schema = Joi.object({
     location : Joi.string()
               .required(),
 
+    imageSelect : Joi.array()
+
 }).required(); 
 
 

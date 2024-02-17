@@ -17,6 +17,7 @@ module.exports.showCamp = async(req , res)=>{
             }
           })
       campground = await campground.populate('author');
+      campground = await campground.populate('image');
       res.render('campgrounds/campdetails' , {campground});
 };
 
