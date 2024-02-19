@@ -1,5 +1,13 @@
 <title>Camp Details</title>
 <%  layout('layouts/boilerplate');%>
+<link href="https://api.mapbox.com/mapbox-gl-js/v3.1.2/mapbox-gl.css" rel="stylesheet">
+<script src="https://api.mapbox.com/mapbox-gl-js/v3.1.2/mapbox-gl.js"></script>
+<script>
+    const mapBoxToken = '<%- process.env.MAPBOX_ACCESS_TOKEN %>';
+    const campgroundPoints = '<%- JSON.stringify(campground.geometry.coordinates) %>';
+    const campgroundName = '<%- JSON.stringify(campground.title) %>';
+
+</script>
 <link type="text/css" rel="stylesheet" href="/styles/stars.css">
 <div class="row justify-content-center">
     <div class="col-sm-4 justify-content-center">
@@ -42,6 +50,8 @@
       </div>
     </div>
     <div class="col-sm-4 justify-content-center">
+      <div id="map" style="height: 250px;" ></div>
+      <label for="map">Locate on map</label>
      <% if (currentUser) { %>
         <form class="needs-validation" action="<%= campground._id%>/review" method="POST" novalidate>
              <fieldset class="starability-basic">
@@ -90,4 +100,5 @@
   </div>
 </div>
 </div>
-
+<script src="/showMap.js">
+</script>

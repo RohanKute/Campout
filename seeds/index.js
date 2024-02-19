@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 const Campground = require('../Models/campgroundDB')
 const cities = require('./cities');
 const {descriptors , places} = require('./helpers')
-const Review = require('../Models/reviewDB')
 mongoose.connect('mongodb://127.0.0.1:27017/yelp-camp');
 
 const db = mongoose.connection;
@@ -33,7 +32,8 @@ const seedDB = async() => {
               url: 'https://res.cloudinary.com/duq3vm2lu/image/upload/v1708152260/campout-project/nm58mpt84gwmrqmhfjzf.jpg',
               imgName: 'campout-project/nm58mpt84gwmrqmhfjzf',
             }),
-            author : "65ba023d48f818b8fea15de6"
+            author : "65ba023d48f818b8fea15de6",
+            geometry : { type: 'Point', coordinates: [ 101.711136, 3.139345 ] }
         });
         await newCamp.save();
     }

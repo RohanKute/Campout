@@ -1,16 +1,20 @@
 const Campground = require('../Models/campgroundDB');
 const Review = require('../Models/reviewDB');
 const { cloudinary } = require('../config/cloudinaryConfig');
+const { getGeoCodeData } = require('../config/mapBox');
 
 
 module.exports.saveCamp = async (req , res , next)=>{  
           const newCamp = new Campground(req.body);
           newCamp.author = req.user._id
           newCamp.image = req.files.map(img => ({url : img.path , imgName : img.filename}))
+          const data= await getGeoCodeData(req.body.location)
+          newCamp.geometry = data.body.features[0].geometry;
           await newCamp.save();
           req.flash('success' , 'Added new camp successfully');
           res.redirect('/viewcamps');
 };
+
 module.exports.loadEditCampPage = async (req ,res) => {
         const campground = await Campground.findById(req.params.id);
         res.render('campgrounds/editcamp' , {campground});
