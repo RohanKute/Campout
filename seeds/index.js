@@ -17,10 +17,10 @@ const getTitle = arr => arr[Math.floor(Math.random() * arr.length)];
 
 const seedDB = async() => {
     await Campground.deleteMany({});
-    for(let i = 0; i < 35; i++){
-        const random1000 = Math.floor(Math.random()  * 1000);
+    for(let i = 0; i < 50; i++){
+        const random950 = Math.floor(Math.random()  * 950);
         const newCamp = new Campground({
-            location:`${cities[random1000].city} , ${cities[random1000].state}`,
+            location:`${cities[random950].city} , ${cities[random950].state}`,
             title : `${getTitle(descriptors)} ${getTitle(places)}`,
             price : Math.floor(Math.random()  * 500),
             description : "Lorem ipsum dolor sit amet consectetur adipisicing  deleniti nam maxime",
@@ -33,7 +33,8 @@ const seedDB = async() => {
               imgName: 'campout-project/nm58mpt84gwmrqmhfjzf',
             }),
             author : "65ba023d48f818b8fea15de6",
-            geometry : { type: 'Point', coordinates: [ 101.711136, 3.139345 ] }
+            geometry : { type: 'Point', coordinates:[cities[random950].longitude,
+                                                 cities[random950].latitude ]}
         });
         await newCamp.save();
     }

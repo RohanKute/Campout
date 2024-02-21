@@ -5,8 +5,6 @@ const  { validateReviewSchema}  = require('../validation/SchemaValidate');
 const { IsLoggedIn  } = require('../validation/auth/Islogged');
 const { renderCamps, showCamp, createReview, loadCreatePage } = require('../controllers/campRoutes');
 
-
-
 router.get('/' , renderCamps)
 
 router.get('/campdetails/:id' , showCamp);
