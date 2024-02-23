@@ -25,11 +25,11 @@ const seedDB = async() => {
             price : Math.floor(Math.random()  * 500),
             description : "Lorem ipsum dolor sit amet consectetur adipisicing  deleniti nam maxime",
             image: ({
-              url: 'https://res.cloudinary.com/duq3vm2lu/image/upload/v1708152259/campout-project/sq2iduivjsy6oyjvkbjj.jpg',
+              url: 'https://res.cloudinary.com/duq3vm2lu/image/upload/v1708166013/campout-project/ahea6fr6hdwvqlevnjku.jpg',
               imgName: 'campout-project/sq2iduivjsy6oyjvkbjj',
             },
             {
-              url: 'https://res.cloudinary.com/duq3vm2lu/image/upload/v1708152260/campout-project/nm58mpt84gwmrqmhfjzf.jpg',
+              url: 'https://res.cloudinary.com/duq3vm2lu/image/upload/v1708157134/campout-project/ejpkf3qwqxp4ipn7glb5.jpg',
               imgName: 'campout-project/nm58mpt84gwmrqmhfjzf',
             }),
             author : "65ba023d48f818b8fea15de6",
