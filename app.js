@@ -33,12 +33,14 @@ app.engine('ejs', ejsMate);
 app.use(express.static('assets'))
 app.use(mongoSantize());
 app.use(session({
+  name: 'session',
   secret: 'secreteforsession',
   resave: false,
   saveUninitialized: false,
   cookie: {
     expires : Date.now() * 1000 * 60 * 60 * 24 * 7,
     httpOnly : true,
+    // secure: true(for production)
     maxAge : 1000 * 60 * 60 * 24 * 7
   }
 }));
