@@ -21,6 +21,9 @@ const User = require('./Models/userDB');
 const LocalStrategy = require('passport-local');
 const checkReturnTo = require('./validation/auth/checkReturnTo');
 const mongoSantize = require('express-mongo-sanitize');
+const helmet = require('helmet');
+const { config } = require('dotenv');
+const { CSPconfig } = require('./config/contentSPConfig');
 
 app.use(methodOverride('_method'))
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -45,6 +48,10 @@ app.use(session({
   }
 }));
 app.use(flash());
+app.use(helmet());
+app.use(
+  helmet.contentSecurityPolicy(CSPconfig)
+);
 
 passport.use(new LocalStrategy(User.authenticate()));
 

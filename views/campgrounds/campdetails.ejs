@@ -1,7 +1,7 @@
 <title>Camp Details</title>
 <%  layout('layouts/boilerplate');%>
-<link href="https://api.mapbox.com/mapbox-gl-js/v3.1.2/mapbox-gl.css" rel="stylesheet">
-<script src="https://api.mapbox.com/mapbox-gl-js/v3.1.2/mapbox-gl.js"></script>
+<link crossorigin="anonymous" href="https://api.mapbox.com/mapbox-gl-js/v3.1.2/mapbox-gl.css" rel="stylesheet">
+<script crossorigin="anonymous" src="https://api.mapbox.com/mapbox-gl-js/v3.1.2/mapbox-gl.js"></script>
 <script>
     const mapBoxToken = '<%- process.env.MAPBOX_ACCESS_TOKEN %>';
     const campgroundPoints = '<%- JSON.stringify(campground.geometry.coordinates) %>';
@@ -16,7 +16,7 @@
             <div class="carousel-inner" >
               <% campground.image.forEach(image => { %>
               <div class="carousel-item active">
-                <img src="<%= image.url %>" class="d-block w-100 mh-95" style="height: 280px;" alt="<%= campground.title %>">
+                <img crossorigin="anonymous" src="<%= image.url %>" class="d-block w-100 mh-95" style="height: 280px;" alt="<%= campground.title %>">
               </div>
               <% }) %>
           </div>

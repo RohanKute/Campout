@@ -1,7 +1,9 @@
-<title>Edit Camp</title>
+<title>Error!</title>
 <%= layout('layouts/boilerplate');%>
      <div class="alert alert-warning" role="alert">
         <h5> <%= err.messege %> </h5>
         <h5> <%= err.statusCode %> </h5>
-         <p> <%= err.stack %> </p>
+         <% if (process.env.NODE_ENV === 'production') { %>
+            <p> <%= err.stack %> </p>
+         <% } %>
       </div>
