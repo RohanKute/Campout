@@ -24,6 +24,7 @@ const mongoSantize = require('express-mongo-sanitize');
 const helmet = require('helmet');
 const { config } = require('dotenv');
 const { CSPconfig } = require('./config/contentSPConfig');
+const { renderCampLanding } = require('./controllers/campRoutes');
 
 app.use(methodOverride('_method'))
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -101,6 +102,8 @@ app.use((err , req , res , next)=>{
   if (!err.message) err.message = 'Oh No, Something Went Wrong!'
   res.status(statusCode).render('campgrounds/error', { err })
 })
+
+app.get('/' , renderCampLanding);
 
 
 

@@ -43,6 +43,10 @@ module.exports.loadCreatePage = async (req ,res) => {
       res.render('campgrounds/createnew');
 };
 
+module.exports.renderCampLanding = async(req , res)=>{
+      const campgrounds =  await Campground.find({});
+      res.render('campgrounds/landingPage' , {campgrounds});
+}
 
 
 

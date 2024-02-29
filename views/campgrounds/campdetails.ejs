@@ -1,6 +1,7 @@
 <title>Camp Details</title>
 <%  layout('layouts/boilerplate');%>
 <link crossorigin="anonymous" href="https://api.mapbox.com/mapbox-gl-js/v3.1.2/mapbox-gl.css" rel="stylesheet">
+<link crossorigin="anonymous" href="/styles/general.css" rel="stylesheet">
 <script crossorigin="anonymous" src="https://api.mapbox.com/mapbox-gl-js/v3.1.2/mapbox-gl.js"></script>
 <script>
     const mapBoxToken = '<%- process.env.MAPBOX_ACCESS_TOKEN %>';
@@ -8,7 +9,6 @@
     const campgroundName = '<%- JSON.stringify(campground.title) %>';
 
 </script>
-<link type="text/css" rel="stylesheet" href="/styles/stars.css">
 <div class="row justify-content-center">
     <div class="col-sm-4 justify-content-center">
       <div class="card m-auto p-0">
