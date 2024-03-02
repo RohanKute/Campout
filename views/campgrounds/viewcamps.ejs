@@ -2,18 +2,27 @@
 <% layout('layouts/boilerplate');%>
 <link crossorigin="anonymous" href="https://api.mapbox.com/mapbox-gl-js/v3.1.2/mapbox-gl.css" rel="stylesheet">
 <script crossorigin="anonymous" src="https://api.mapbox.com/mapbox-gl-js/v3.1.2/mapbox-gl.js"></script>
-<div id="map" style="height: 300px; width: 100vw;"></div>
-      <% for (let i = 0; i < 10; i++) { %>
-            <div class="card col p-0" style="min-width: 20rem; max-width: 20rem; margin: 10px auto;">
-                <img crossorigin="anonymous" src="<%= campgrounds[i].image[0].url %>" class="card-img-top" >
-                <div class="card-body">
-                  <h5 class="card-title"><a href="viewcamps/campdetails/<%= campgrounds[i]._id  %>"><%= campgrounds[i].title %></a></h5>
-                  <p class="card-text"><%= campgrounds[i].description %></p>
-                </div>
-            </div>    
-       <% } %>
+<div class="row justify-content-center">
+  <div id="map" class="cluster-map"></div>
+      <h5 class="text-center cluster-heading muted">Locate on map</h5>
+</div>
+<% if (campgrounds.length) { %>
+  <% campgrounds.forEach(camp => { %>
+    <div class="card front-full col p-0" style="min-width: 20rem; max-width: 20rem; margin: 10px auto;">
+      <% if (camp.image.length) { %>
+        <img style="height: 250px;" crossorigin="anonymous" src="<%= camp.image[0].thumbnail %>" class="card-img-top" href="viewcamps/campdetails/<%= camp._id  %>" >
+      <% } else { %>
+          <div class="card-img-top" style="background-color: white;"></div>
+      <% } %>
+      <div class="card-body front">
+          <h5 class="card-title"><a class="btn camp-link" href="viewcamps/campdetails/<%= camp._id  %>"><%= camp.title %></a></h5>
+        </div>
+    </div>    
+  <% }) %>
+<% } %>
 <script>
    const mapBoxToken = '<%- process.env.MAPBOX_ACCESS_TOKEN %>'
    const campgroundData = '<%- JSON.stringify(campgrounds) %>'
 </script>
 <script  crossorigin="anonymous" src="/clusterMap.js"></script>
+

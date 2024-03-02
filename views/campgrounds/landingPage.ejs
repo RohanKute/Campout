@@ -15,11 +15,15 @@
     <div class="col-sm-6">
         <div id="imageCarousel" class="carousel slide img-carousel" data-bs-ride="carousel">
             <div class="carousel-inner m-0" >
-              <% for (let i = 0; i < 10; i++) { %>
-              <div class="carousel-item active ">
-                <img crossorigin="anonymous" src="<%= campgrounds[i].image[0].url %>" class="d-block w-100 mh-120 img-single" style="height: fit-content;">
+              <% for (let i = 0; i < 1; i++) { %>
+              <div class="carousel-item active" style="max-height: 400px;">
+                  <% if (campgrounds.length && campgrounds[i]) { %>
+                      <% if (campgrounds[i].image.length) { %>
+                        <img crossorigin="anonymous" src="<%= campgrounds[i].image[0].url %>" class="d-block w-100 h-100 img-single" >
+                      <% } %>
+                  <% } %>
                 <div class="carousel-caption d-none d-md-block">
-                        <h6 class="text-muted" style="color: black;"><%= campgrounds[i].title %></h6>
+                  <h6 class="text-muted" style="color: black;"><%= campgrounds[i].title %></h6>
               </div>
             </div>
               <% } %>

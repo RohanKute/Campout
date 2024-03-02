@@ -2,8 +2,8 @@
 <% layout('layouts/boilerplate');%>
 
 <div style="max-width: 400px;  margin: auto;">
- <h2>Create New Camp!</h2>
-  <form class="needs-validation" action="/savecamp" method="POST" enctype="multipart/form-data" novalidate>
+  <form class="needs-validation form" action="/savecamp" method="POST" enctype="multipart/form-data" novalidate>
+    <h3>Create New Camp!</h3>
       <div class="mb-3">
         <label for="title" class="form-label" name="title" >Title</label>
         <input type="text" class="form-control" id="title" name="title" required style="border: 1px solid rgb(81, 80, 80);">
@@ -20,7 +20,7 @@
       </div>
       <label for="price" class="form-label" name="price">Price</label>
       <div class="input-group mb-3">
-          <span class="input-group-text" id="basic-addon1">$</span>
+          <span class="input-group-text" id="basic-addon1"><span>&#8377;</span></span>
           <input type="number" class="form-control" id="price" name="price" min="0" max="500" required style="border: 1px solid rgb(81, 80, 80)">
           <div class="valid-feedback">
             Looks good!
@@ -43,8 +43,9 @@
           Looks good!
         </div>
     </div>
-      <div class="d-grid  d-md-flex justify-content-center">
-        <button  type="submit" class="btn btn-success">Submit</button>
+      <div class="d-grid" style="display: block;">
+        <button  type="submit" class="btn btn-outline-success">Submit</button>
       </div>
+      <a href="/viewcamps" class="btn btn-outline-danger mt-2" style="display: block;">Cancel</a>
   </form>
 </div>

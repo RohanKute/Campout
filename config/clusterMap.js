@@ -1,12 +1,11 @@
 
 mapboxgl.accessToken = mapBoxToken;
 const campData = {features : JSON.parse(campgroundData)};
-console.log(campData);
 const map = new mapboxgl.Map({
     container: 'map',
     // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
     style: 'mapbox://styles/mapbox/dark-v11',
-    center: [-103.5917, 40.6699],
+    center: [77.216721,28.644800],
     zoom: 3
 });
 

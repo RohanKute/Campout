@@ -38,7 +38,72 @@
 
 
 .see-camp-link:hover{
-    border: 2px solid rgb(52, 255, 238);
+    border: 2px solid #34ffee;
     background-image: linear-gradient(to left, #e8fbfb, #ccfdfc, #adfefd, #87fffd, #52fffd);;
 }
 
+.cluster-map{
+    border: 2px solid #34ffee;
+    border-radius: 20px;
+    height: 300px; 
+    width: 70vw;
+}
+
+@media (max-width : 720px) {
+     .cluster-map{
+        width: 85vw;
+     }
+}
+
+.cluster-heading{
+    background-image: linear-gradient(to top, #637074, #616b6e, #5f6669, #5c6263, #5a5d5e);        -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+}
+
+.front{
+    background-image: radial-gradient(circle, #191616, #181617, #181617, #171617, #161617, #161617, #161616, #161616, #161616, #161616, #161616, #161616);
+    opacity: 0.9;
+}
+
+.camp-link{
+    color : white;
+   text-decoration: underline;
+}
+.camp-link:hover{
+    text-decoration: none;
+    color : white;
+    border: 1px solid #c4fcff ;
+}
+
+.front-full{
+    border: 2px solid #c4fcff; 
+    transition: transform 0.2s ease-in-out; 
+}
+
+.front-full:hover {
+    border: 4px solid #69f3fa; 
+    transform: translateY(-5px); 
+
+  }
+
+.form{
+    background-color: rgb(255, 255, 255);
+    padding: 20px;
+    box-shadow:1px 1px 5px #c1fcff;
+    border-radius: 10px;
+    border: 1px solid #cbcbcb; 
+}
+
+.navbar-brand{
+    transition: transform 0.1s ease-in-out; 
+}
+
+.navbar-brand:hover{
+    transform: translateY(-5px); 
+}
+
+.footer{
+    background-color: rgba(255, 255, 255,0.8);
+    backdrop-filter: blur(6px);
+
+}

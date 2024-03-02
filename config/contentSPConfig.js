@@ -11,6 +11,7 @@ const scriptSrcUrls = [
 const styleSrcUrls = [
     "https://kit-free.fontawesome.com/",
     "https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css",
+    "https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css",
     "https://api.mapbox.com/",
     "https://api.tiles.mapbox.com/",
     "https://fonts.googleapis.com/",
@@ -22,7 +23,10 @@ const connectSrcUrls = [
     "https://b.tiles.mapbox.com/",
     "https://events.mapbox.com/",
 ];
-const fontSrcUrls = [];
+const fontSrcUrls = [
+    "https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/"
+
+];
 
 const CSPconfig = {
     directives: {
@@ -39,7 +43,7 @@ const CSPconfig = {
             "https://res.cloudinary.com/duq3vm2lu/", 
             "https://images.unsplash.com/",
         ],
-        fontSrc: ["'self'", ...fontSrcUrls],
+        fontSrc: ["'self'",...fontSrcUrls],
     },
 }
 

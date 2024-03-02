@@ -2,9 +2,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-
-mongoose.connect('mongodb://127.0.0.1:27017/yelp-camp');
-
 const opts = {toJSON : {virtuals: true}};
 const ImageSchema = new Schema({ 
         url : String,
@@ -12,8 +9,6 @@ const ImageSchema = new Schema({
   
 });
 
-
-// {/* <a href="viewcamps/campdetails/${this._id}"><h3>${this.title}</h3></a> */}
 const campgSchema = new Schema({
     title : String,
     price : Number,
@@ -41,7 +36,7 @@ const campgSchema = new Schema({
 },opts)
 
 ImageSchema.virtual('thumbnail').get(function () {
-  return this.url.replace('/upload' , '/upload/w_200')
+  return this.url.replace('/upload' , '/upload/w_500')
 });
 
 campgSchema.virtual('properties.popupText').get(function () {

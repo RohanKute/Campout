@@ -2,6 +2,7 @@
 <%  layout('layouts/boilerplate');%>
 <link crossorigin="anonymous" href="https://api.mapbox.com/mapbox-gl-js/v3.1.2/mapbox-gl.css" rel="stylesheet">
 <link crossorigin="anonymous" href="/styles/general.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" crossorigin="anonymous">
 <script crossorigin="anonymous" src="https://api.mapbox.com/mapbox-gl-js/v3.1.2/mapbox-gl.js"></script>
 <script>
     const mapBoxToken = '<%- process.env.MAPBOX_ACCESS_TOKEN %>';
@@ -10,13 +11,13 @@
 
 </script>
 <div class="row justify-content-center">
-    <div class="col-sm-4 justify-content-center">
+    <div class="col-sm-4 justify-content-center mb-3">
       <div class="card m-auto p-0">
           <div id="imageCarousel" class="carousel slide" >
             <div class="carousel-inner" >
               <% campground.image.forEach(image => { %>
               <div class="carousel-item active">
-                <img crossorigin="anonymous" src="<%= image.url %>" class="d-block w-100 mh-95" style="height: 280px;" alt="<%= campground.title %>">
+                <img crossorigin="anonymous" src="<%= image.thumbnail %>" class="d-block w-100 mh-95" style="height: 280px;" alt="<%= campground.title %>">
               </div>
               <% }) %>
           </div>
@@ -35,25 +36,34 @@
         </div>
         <ul class="list-group list-group-flush">
           <li class="list-group-item"><%= campground.location %></li>
-          <li class="list-group-item">$ <%= campground.price %></li>
-          <li class="list-group-item">By <%= campground.author.username %></li>
+          <li class="list-group-item"><span>&#8377;</span>
+            <%= campground.price %></li>
+          <li class="list-group-item text-muted">By <%= campground.author.username %></li>
         </ul>
         <div class="card-body">
             <% if (currentUser && currentUser._id.equals(campground.author._id)) { %>
-              <a class="btn btn-info" href="/editcamp/<%= campground._id  %>" role="button">Edit</a>
+              <a class="btn btn-outline-info" href="/editcamp/<%= campground._id  %>" role="button">
+                <i class="bi bi-pencil-square"></i>
+                Edit
+              </a>
               <form action="/deletecamp/<%= campground._id %>?_method=DELETE" method="POST" style="display: inline;">
-                <button class="btn btn-danger" >Delete</button>
+                <button class="btn btn-outline-danger">
+                  <i class="bi bi-trash3"></i>
+                  Delete
+                </button>
               </form>
             <% } %>
-          <a class="btn btn-light" href="/viewcamps" role="button">Back</a>
+          <a class="btn btn-light" href="/viewcamps" role="button">
+            <i class="bi bi-arrow-left"></i>
+          </a>
         </div>
       </div>
     </div>
     <div class="col-sm-4 justify-content-center">
       <div id="map" style="height: 250px;" ></div>
-      <label for="map">Locate on map</label>
-     <% if (currentUser) { %>
-        <form class="needs-validation" action="<%= campground._id%>/review" method="POST" novalidate>
+      <label for="map" class="mb-2">Locate on map</label>
+        <% if (currentUser) { %>
+        <form class="needs-validation form" action="<%= campground._id%>/review" method="POST" novalidate>
              <fieldset class="starability-basic">
               <legend style="font-weight: 500;">Rate!</legend>
                     <input type="radio" id="no-rate" class="input-no-rate" name="rating" value="0" checked aria-label="No rating." />
@@ -72,29 +82,37 @@
               <label for="description" class="form-label">Description</label>
               <textarea class="form-control" id="description" rows="3" name="reviewDescp" required></textarea>
             </div>
-            <button class="btn btn-success">Add Review</button>
+             <button class="btn btn-outline-success">Add Review</button>
 
             
          </form>
      <% } %>
      <div>
       <%  campground.review.forEach((review) => { %>
-                <div class="card mt-2 mb-2">
-                    <h6 class="card-header"><p class="text-muted">By <%= review.author.username %></p></h6>
-                    <div class="card-body">
-                      <h5 class="card-title">
+          <div class="card mt-2 mb-2" >
+              <div class="card-body">
+                <h5 class="card-title">
+                     <div class="row">
+                       <div class="col-10">
                         <p class="starability-result" data-rating="<%= review.rating %>">
-                        Rated: <%= review.rating %> stars
-                        </p> 
-                      </h5>
-                      <p class="card-text"></p><%= review.reviewDescp %></p>
-                      <% if (currentUser && currentUser._id.equals(review.author._id)) { %>
-                        <form action="/deletereview/<%= review._id %>?_method=DELETE" method="POST" style="display: inline;">
-                          <button class="btn btn-danger" >Remove</button>
-                        </form>
-                      <% } %>
-                    </div>
-                </div>
+                          <%= review.rating %>
+                      </p>
+                       </div>
+                       <div class="col-2">
+                        <% if (currentUser && currentUser._id.equals(review.author._id)) { %>
+                          <form class="justify-content-center"action="/deletereview/<%= review._id %>?_method=DELETE" method="POST" style="display: block;">
+                            <button class="btn btn-outline-dark m-0" ><i class="bi bi-trash3"></i>
+                            </button>
+                          </form>
+                        <% } %>
+                       </div>
+                     </div>
+                </h5>
+                <h6 class="card-text m-0"><%= review.reviewDescp %></h6>
+                <p class="card-subtitle text-muted mt-1"><small>- <%=review.author.username %></small></p>
+
+            </div>
+</div>
       <% })%>
     </div>
   </div>

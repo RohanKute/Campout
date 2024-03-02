@@ -1,0 +1,9 @@
+<% for (let i = 0; i < 10; i++) { %>
+    <div class="card col p-0" style="min-width: 20rem; max-width: 20rem; margin: 10px auto;">
+        <img crossorigin="anonymous" src="<%= campgrounds[i].image[0].url %>" class="card-img-top" >
+        <div class="card-body">
+          <h5 class="card-title"><a href="viewcamps/campdetails/<%= campgrounds[i]._id  %>"><%= campgrounds[i].title %></a></h5>
+          <p class="card-text"><%= campgrounds[i].description %></p>
+        </div>
+    </div>    
+<% } %>

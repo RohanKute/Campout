@@ -25,7 +25,7 @@ const helmet = require('helmet');
 const { config } = require('dotenv');
 const { CSPconfig } = require('./config/contentSPConfig');
 const { renderCampLanding } = require('./controllers/campRoutes');
-
+const mongoUrl = process.env.MONGODB_URL;
 app.use(methodOverride('_method'))
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set('view engine' , 'ejs');
@@ -71,7 +71,7 @@ app.use((req, res, next) => {
 
 app.use(checkReturnTo);
 
-mongoose.connect('mongodb://127.0.0.1:27017/yelp-camp');
+mongoose.connect(mongoUrl);
 
 const db = mongoose.connection;
 

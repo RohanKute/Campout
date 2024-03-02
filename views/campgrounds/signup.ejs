@@ -2,9 +2,9 @@
 <% layout('layouts/boilerplate');%>
 
 <div style="max-width: 400px;  margin: auto;">
-   <h3>Signup</h3>
-        <form class="needs-validation" action="/signup" method="POST" novalidate>
-               <div class="mb-3">
+        <form class="needs-validation form" action="/signup" method="POST" novalidate>
+          <h3>Signup</h3>
+          <div class="mb-3">
                  <label for="email" class="form-label" name="email" >Email</label>
                  <input type="email" class="form-control" id="email" name="email"  required style="border: 1px solid rgb(81, 80, 80);">
                  <div class="valid-feedback">
@@ -25,8 +25,8 @@
                    Looks good!
                  </div>
                </div>
-               <div class="d-grid  d-md-flex justify-content-center">
-                 <button  type="submit" class="btn btn-success">Signup</button>
+               <div class="d-grid" style="display: block;">
+                 <button  type="submit" class="btn btn-outline-success">Signup</button>
                </div>
            </form>
 </div>
