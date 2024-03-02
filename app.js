@@ -25,6 +25,7 @@ const helmet = require('helmet');
 const { config } = require('dotenv');
 const { CSPconfig } = require('./config/contentSPConfig');
 const { renderCampLanding } = require('./controllers/campRoutes');
+const MongoStore = require('connect-mongo')(session);
 const mongoUrl = process.env.MONGODB_URL;
 app.use(methodOverride('_method'))
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -36,9 +37,16 @@ app.use(express.static(__dirname + '/config'));
 app.engine('ejs', ejsMate);
 app.use(express.static('assets'))
 app.use(mongoSantize());
+
+const store = new MongoStore({
+   url : mongoUrl,
+   secret: process.env.SESSION_SECRET,
+   touchAfter: 24*60*60
+})
 app.use(session({
+  store,
   name: 'session',
-  secret: 'secreteforsession',
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
   cookie: {
